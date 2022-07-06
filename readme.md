@@ -13,7 +13,6 @@ I desgined the website with Figma. You can view the design [here](https://www.fi
 - WYSIWYG for blog creation.
 - Easily managable blogs.
 - Responsive on all devices.
-## Tech
 
 ## Installation
 
