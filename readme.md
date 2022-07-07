@@ -5,6 +5,8 @@ Ethereal Blog is a very simple blogging software made with Bootstrap and PHP. Th
 
 I desgined the website with Figma. You can view the design [here](https://www.figma.com/file/0mmnabuHTi1zcAAykfN9yi/Untitled?node-id=0%3A1). This isn't the first thing I have designed but I feel like the design came out pretty well.
 
+You can attempt to take the code and set it up on your own server if you go through the code and setup the database structure but seeing as this is just for me to learn I wont be doing that. I probably am only making this for future use on my personal website.
+
 ## Features
 
 - Beautiful blog website made with Bootstrap.
@@ -14,10 +16,9 @@ I desgined the website with Figma. You can view the design [here](https://www.fi
 - Easily managable blogs.
 - Responsive on all devices.
 
-## Installation
-
-Depending on where you are installing it. Please ensure that your server has access to PHP and MySQL.
-COMING LATER.
+## Pictures
+![alt text](https://i.imgur.com/LCHzW4L.png)
+![alt text](https://i.imgur.com/6sdx9wM.png)
 
 ## License
 

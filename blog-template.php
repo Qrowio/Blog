@@ -4,7 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>ethereal_blog</title>
+    <title>Ethereal Blog</title>
+    <link rel="icon" type="image/png" href="./assets/img/ethereal-notext.svg">
+    <meta name="title" content="Ethereal Blog">
+    <meta name="description" content="Get all the up to date information on the Ethereal Blogging system!">
+    <meta name="keywords" content="blog, technology, cool, php, template">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -16,8 +23,8 @@
             <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><img src="assets/img/ethereal.png"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-3">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="#">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="index.php">Blogs</a></li>
                         <li class="nav-item"><a class="nav-link active" href="#">Discord</a></li>
                     </ul><button class="button">Discord</button>
                 </div>
