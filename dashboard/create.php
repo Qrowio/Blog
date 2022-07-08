@@ -1,9 +1,9 @@
 <?php 
-require_once 'connection.php';
+require_once '../connection.php';
 session_start();
 
-if(isset($_SESSION['blogger'])){
-    header('location: ../Blog/dashboard/index.php');
+if(!isset($_SESSION['blogger'])){
+    header('location: index.php');
 }
 
 ?>
@@ -38,8 +38,22 @@ if(isset($_SESSION['blogger'])){
     </div>
     <div class="container" style="margin-top: 1rem;padding: 0px;max-width: 960px;">
         <div class="row">
+            <form method="post">
             <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Title</label><input type="text" class="blog-creation-input"></div>
             <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Picture</label><input type="file"></div>
+            <div class="col-md-12 col-xxl-12" style="padding: 0px;margin-right: 40px; margin-top: 2rem;"><textarea name="editor1" style="width: 100%;" id="editor1"></textarea>    </div>
+      
+            <script>
+            CKEDITOR.replace( 'editor1' );
+            </script>
+
+            <!-- 
+                To do tomorrow:
+                    - Create button and style it
+                    - Test input for all of them
+                    - Create database insert
+             -->
+            </form>
         </div>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.js"></script>

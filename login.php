@@ -3,7 +3,7 @@ require_once 'connection.php';
 session_start();
 
 if(isset($_SESSION['blogger'])){
-    header('location: ../Blog/dashboard/index.php');
+    header('location: dashboard/index.php');
 }
 
 if(isset($_POST['submit'])){

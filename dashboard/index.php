@@ -1,9 +1,9 @@
 <?php 
-require_once 'connection.php';
+require_once '../connection.php';
 session_start();
 
-if(isset($_SESSION['blogger'])){
-    header('location: ../Blog/dashboard/index.php');
+if(!isset($_SESSION['blogger'])){
+    header('location: ../index.php');
 }
 
 ?>
@@ -37,12 +37,12 @@ if(isset($_SESSION['blogger'])){
     </div>
     <div class="container" style="margin-top: 2rem;max-width: 960px;">
         <div class="row">
-            <div class="col-md-12" style="padding: 0px;margin-bottom: 1rem;"><a class="quick-link" href="https://github.com/Qrowio/Blog">
+        <div class="col-md-12" style="padding: 0px;margin-bottom: 1rem;"><a class="quick-link" href="https://github.com/Qrowio/Blog">
                     <div class="index-main-sec-div">
                         <div class="left-div"><img src="../assets/img/69book.svg"></div>
                         <div style="width: 100%;padding-left: 20px;display: flex;align-items: center;">
                             <div class="div-2">
-                                <h1 class="quick-title">Read the GitHub Page.</h1>
+                                <h1 class="quick-title">Read the GitHub Page</h1>
                                 <h1 class="quick-desc grey">Get a basic understanding of how to go around using this blog system.<br></h1>
                             </div>
                         </div>
