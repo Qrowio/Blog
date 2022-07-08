@@ -1,8 +1,9 @@
 <?php 
+require_once 'connection.php';
 session_start();
 
-if(!isset($_SESSION['blogger'])){
-    header('location: ../login.php');
+if(isset($_SESSION['blogger'])){
+    header('location: ../Blog/dashboard/index.php');
 }
 
 ?>
