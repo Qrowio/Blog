@@ -1,5 +1,11 @@
 <?php
 require_once 'connection.php';
+
+$ID = $_GET['id'];
+
+$statement = $connection->prepare("SELECT * FROM blogs WHERE id = :id ORDER BY ID DESC");
+$statement->execute([':id' => $ID]);
+$row =  $statement->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,13 +46,10 @@ require_once 'connection.php';
         <div class="row">
             <div class="col-md-7 col-lg-8 col-xl-8 col-xxl-12">
                 <div class="blog-main-div second">
-                    <h1 class="blog-main-title">Article Name 1</h1>
+                    <h1 class="blog-main-title"><?php echo $row['title']?></h1>
                     <h1 class="blog-main-date grey">December 25, 2020</h1>
                     <hr class="blog-main-hr">
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1>
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1>
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1>
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1>
+                    <h1 class="blog-main-desc"><?php echo $row['description']?></h1>
                 </div>
             </div>
         </div>

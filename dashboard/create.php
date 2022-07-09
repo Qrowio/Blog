@@ -6,6 +6,26 @@ if(!isset($_SESSION['blogger'])){
     header('location: index.php');
 }
 
+if(isset($_POST['submit'])){
+    $title = filter_var($_POST['blog_title'], FILTER_SANITIZE_STRING);
+    $desc = htmlentities($_POST['editor1'], ENT_QUOTES|ENT_SUBSTITUTE|ENT_DISALLOWED);
+    $description = addslashes($_POST['editor1']);
+    if(!isset($_POST['blog_title'])){
+        echo "Please enter a blog title";
+        // Add better styling for the error
+    } else {
+        try {
+            $statement = $connection->prepare("INSERT INTO blogs (title,description) VALUES (:title,:desc)");
+            $statement->execute([
+                ':title' => $title,
+                ':desc' => $desc,
+            ]);
+        } catch(PDOException $e) {
+            echo $e;
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,24 +57,25 @@ if(!isset($_SESSION['blogger'])){
         </div>
     </div>
     <div class="container" style="margin-top: 1rem;padding: 0px;max-width: 960px;">
+    <form method="post" style="padding: 0px; display: inline-flex;">
         <div class="row">
-            <form method="post">
-            <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Title</label><input type="text" class="blog-creation-input"></div>
-            <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Picture</label><input type="file"></div>
+            <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Title</label><input type="text" name="blog_title" class="blog-creation-input"></div>
+            <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Picture</label><input name="image" type="file"></div>
             <div class="col-md-12 col-xxl-12" style="padding: 0px;margin-right: 40px; margin-top: 2rem;"><textarea name="editor1" style="width: 100%;" id="editor1"></textarea>    </div>
       
             <script>
             CKEDITOR.replace( 'editor1' );
             </script>
-
+            <div style="text-align: right">
+            <button class="submit-btn" name="submit" type="submit">Submit</button>
+            </div>
             <!-- 
                 To do tomorrow:
-                    - Create button and style it
                     - Test input for all of them
                     - Create database insert
              -->
-            </form>
         </div>
+        </form>
     </div>
     <script src="../assets/bootstrap/js/bootstrap.js"></script>
 </body>

@@ -1,5 +1,8 @@
 <?php
 require_once 'connection.php';
+
+$statement = $connection->prepare("SELECT * FROM blogs ORDER BY ID DESC");
+$statement->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +20,7 @@ require_once 'connection.php';
     <meta name="language" content="English">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Clamp.js/0.5.1/clamp.min.js"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
@@ -39,24 +43,22 @@ require_once 'connection.php';
     <div class="container" style="margin-top: 4rem;">
         <div class="row">
             <div class="col-md-7 col-lg-8 col-xl-8 col-xxl-8">
+                   <?php
+                   $int = 0;
+                    while($int < 3 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){
+                    ?>
                 <div class="blog-main-div">
-                    <h1 class="blog-main-title">Article Name 1</h1>
+                    <h1 class="blog-main-title"><?php echo $row['title'];?></h1>
                     <h1 class="blog-main-date grey">December 25, 2020</h1>
                     <hr class="blog-main-hr">
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1><button class="continue-button" type="button">Continue Reading</button>
+                    <?php $description = mb_strimwidth($row['description'], 0, 300);
+                    ?>
+                    <h1 class="blog-main-desc"><?php echo $description ?><br></h1><a href='blog.php?id=<?php echo $row['id']?>'><button class="continue-button" type="button">Continue Reading</button></a>
                 </div>
-                <div class="blog-main-div">
-                    <h1 class="blog-main-title">Article Name 2</h1>
-                    <h1 class="blog-main-date grey">December 25, 2020</h1>
-                    <hr class="blog-main-hr">
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1><button class="continue-button" type="button">Continue Reading</button>
-                </div>
-                <div class="blog-main-div">
-                    <h1 class="blog-main-title">Article Name 3</h1>
-                    <h1 class="blog-main-date grey">December 25, 2020</h1>
-                    <hr class="blog-main-hr">
-                    <h1 class="blog-main-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium tincidunt egestas ut auctor ac. Metus viverra porta mi ridiculus. Commodo viverra nisi, porttitor eros iaculis. Aenean pellentesque proin nec dui aliquam vitae. Porta at sagittis duis imperdiet enim, in hendrerit. Urna eu lorem ac eget enim cursus sit sit ac. Mattis facilisis congue magnis amet ornare tortor nunc, mi consequat.<br></h1><button class="continue-button" type="button">Continue Reading</button>
-                </div>
+                     <?php
+                    $int++;    
+                   };
+                    ?>
                 <nav style="max-width: 800px;">
                     <ul class="pagination" style="justify-content: center;">
                         <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
@@ -70,21 +72,18 @@ require_once 'connection.php';
                     <h1 class="section-title">Ethereal Hosting</h1>
                     <h1 class="section-desc grey">Ethereal Hosting is a professional hosting company with the intent to educate it’s community on what they’re receiving, servers and technology.<br></h1>
                     <h1 class="section-title bottom">Recent Articles</h1>
-                    <div class="name-div"><a class="section-article-name" href="#">Article Name 1</a>
+                    <?php
+                    $count = 0;
+                    while($count < 5 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){
+                    ?>
+                    <div class="name-div"><a class="section-article-name" href="blog.php?id=<?php echo $row['id']?>"><?php echo $row['title'];?></a>
                         <hr class="section-hr">
                     </div>
-                    <div class="name-div"><a class="section-article-name" href="#">Article Name 2</a>
-                        <hr class="section-hr">
-                    </div>
-                    <div class="name-div"><a class="section-article-name" href="#">Article Name 3</a>
-                        <hr class="section-hr">
-                    </div>
-                    <div class="name-div"><a class="section-article-name" href="#">Article Name 4</a>
-                        <hr class="section-hr">
-                    </div>
-                    <div class="name-div"><a class="section-article-name" href="#">Article Name 5</a>
-                        <hr class="section-hr">
-                    </div>
+
+                    <?php
+                    $count++;
+                    };
+                    ?>
                 </div>
             </div>
         </div>
