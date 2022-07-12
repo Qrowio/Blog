@@ -47,7 +47,7 @@ $row =  $statement->fetch(PDO::FETCH_ASSOC);
             <div class="col-md-7 col-lg-8 col-xl-8 col-xxl-12">
                 <div class="blog-main-div second">
                     <h1 class="blog-main-title"><?php echo $row['title']?></h1>
-                    <h1 class="blog-main-date grey">December 25, 2020</h1>
+                    <h1 class="blog-main-date grey"><?php echo $row['createdAt'];?></h1>
                     <hr class="blog-main-hr">
                     <h1 class="blog-main-desc"><?php echo $row['description']?></h1>
                 </div>

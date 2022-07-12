@@ -8,17 +8,19 @@ if(!isset($_SESSION['blogger'])){
 
 if(isset($_POST['submit'])){
     $title = filter_var($_POST['blog_title'], FILTER_SANITIZE_STRING);
-    $desc = htmlentities($_POST['editor1'], ENT_QUOTES|ENT_SUBSTITUTE|ENT_DISALLOWED);
     $description = addslashes($_POST['editor1']);
+    $created = new DateTime();
+    $created = $created->format('l d M Y');	
     if(!isset($_POST['blog_title'])){
         echo "Please enter a blog title";
         // Add better styling for the error
     } else {
         try {
-            $statement = $connection->prepare("INSERT INTO blogs (title,description) VALUES (:title,:desc)");
+            $statement = $connection->prepare("INSERT INTO blogs (title,description,createdAt) VALUES (:title,:desc,:created)");
             $statement->execute([
                 ':title' => $title,
-                ':desc' => $desc,
+                ':desc' => $description,
+                ':created' => $created,
             ]);
         } catch(PDOException $e) {
             echo $e;

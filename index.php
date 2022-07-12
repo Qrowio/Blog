@@ -1,8 +1,11 @@
 <?php
 require_once 'connection.php';
 
-$statement = $connection->prepare("SELECT * FROM blogs ORDER BY ID DESC");
+$statement = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
 $statement->execute();
+
+$list = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
+$list->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +52,7 @@ $statement->execute();
                     ?>
                 <div class="blog-main-div">
                     <h1 class="blog-main-title"><?php echo $row['title'];?></h1>
-                    <h1 class="blog-main-date grey">December 25, 2020</h1>
+                    <h1 class="blog-main-date grey"><?php echo $row['createdAt'];?></h1>
                     <hr class="blog-main-hr">
                     <?php $description = mb_strimwidth($row['description'], 0, 300);
                     ?>
@@ -74,7 +77,7 @@ $statement->execute();
                     <h1 class="section-title bottom">Recent Articles</h1>
                     <?php
                     $count = 0;
-                    while($count < 5 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){
+                    while($count < 5 && $row =  $list->fetch(PDO::FETCH_ASSOC)){
                     ?>
                     <div class="name-div"><a class="section-article-name" href="blog.php?id=<?php echo $row['id']?>"><?php echo $row['title'];?></a>
                         <hr class="section-hr">
