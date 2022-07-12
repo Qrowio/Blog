@@ -1,4 +1,5 @@
-This will be updated and worked on again after I complete Anime Hub.
+NO - This is not complete
+NO - I do not work on this actively, I work on it when I want to.
 
 # Ethereal Blog
 [![N|Solid](https://www.php.net/images/logos/php-power-white.png)](https://www.php.net/)
