@@ -8,12 +8,14 @@ if(!isset($_SESSION['blogger'])){
 
 if(isset($_POST['submit'])){
     $title = filter_var($_POST['blog_title'], FILTER_SANITIZE_STRING);
-    $description = addslashes($_POST['editor1']);
+    $description = $_POST['editor1'];
     $created = new DateTime();
     $created = $created->format('l d M Y');	
-    if(!isset($_POST['blog_title'])){
+    if(empty($_POST['blog_title'])){
         echo "Please enter a blog title";
         // Add better styling for the error
+    } else if(empty($_POST['editor1'])){
+        echo "Please enter a description";
     } else {
         try {
             $statement = $connection->prepare("INSERT INTO blogs (title,description,createdAt) VALUES (:title,:desc,:created)");
@@ -59,10 +61,10 @@ if(isset($_POST['submit'])){
         </div>
     </div>
     <div class="container" style="margin-top: 1rem;padding: 0px;max-width: 960px;">
-    <form method="post" style="padding: 0px; display: inline-flex;">
+    <form method="post" style="padding: 0px; display: inline-flex;" >
         <div class="row">
             <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Title</label><input type="text" name="blog_title" class="blog-creation-input"></div>
-            <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Picture</label><input name="image" type="file"></div>
+            <div class="col-md-12 col-xxl-5" style="padding: 0px;margin-right: 40px;"><label class="form-label blog-lbel">Blog Picture</label><input type="file" id='file' name='file'></div>
             <div class="col-md-12 col-xxl-12" style="padding: 0px;margin-right: 40px; margin-top: 2rem;"><textarea name="editor1" style="width: 100%;" id="editor1"></textarea>    </div>
       
             <script>
