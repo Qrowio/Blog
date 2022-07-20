@@ -59,7 +59,7 @@ if(!isset($_SESSION['blogger'])){
                         </div>
                     </div>
                 </a></div>
-            <div class="col-md-12" style="padding: 0px;margin-bottom: 1rem;"><a class="quick-link" href="#">
+            <div class="col-md-12" style="padding: 0px;margin-bottom: 1rem;"><a class="quick-link" href="view.php">
                     <div class="index-main-sec-div">
                         <div class="left-div purple"><img src="../assets/img/blog.svg"></div>
                         <div style="width: 100%;padding-left: 20px;display: flex;align-items: center;">

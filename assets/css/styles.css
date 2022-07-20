@@ -342,3 +342,30 @@ a {
 .submit-btn:hover {
     background: #3e36ce!important;
 }
+
+.view-blog-div {
+  padding: 15px;
+  background: #1c2532;
+  border-radius: 8px;
+  display: inline-flex;
+}
+
+.blog-image-view {
+  min-width: 100px!important;
+  object-fit:cover;
+  max-height: 100px!important;
+  border-radius: 8px;
+}
+
+.blog-view-title {
+  font-size: 22px;
+  margin-left: 10px;
+  font-weight: 400;
+  display: initial;
+}
+
+.blog-view-desc {
+  font-size: 18px;
+  margin-left: 10px;
+  font-weight: 200;
+}

@@ -76,15 +76,15 @@ $list->execute();
                     <h1 class="section-desc grey">Ethereal Hosting is a professional hosting company with the intent to educate it’s community on what they’re receiving, servers and technology.<br></h1>
                     <h1 class="section-title bottom">Recent Articles</h1>
                     <?php
-                    $count = 0;
-                    while($count < 5 && $row =  $list->fetch(PDO::FETCH_ASSOC)){
+                    $int = 0;
+                    while($int < 5 && $row =  $list->fetch(PDO::FETCH_ASSOC)){
                     ?>
                     <div class="name-div"><a class="section-article-name" href="blog.php?id=<?php echo $row['id']?>"><?php echo $row['title'];?></a>
                         <hr class="section-hr">
                     </div>
 
                     <?php
-                    $count++;
+                    $int++;
                     };
                     ?>
                 </div>
