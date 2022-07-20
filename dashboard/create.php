@@ -25,6 +25,7 @@ if(isset($_POST['submit'])){
     $description = $_POST['editor1'];
     $created = new DateTime();
     $created = $created->format('l d M Y');
+    $creator = $_SESSION['blogger']['username'];
     $dir = "../assets/img/uploads/";
     $file = $dir . basename($_FILES["file"]["name"]);
     $type = strtolower(pathinfo($file,PATHINFO_EXTENSION));
@@ -48,6 +49,9 @@ if(isset($_POST['submit'])){
                     ':created' => $created,
                     ':image' => $file,
                 ]);
+
+                $statement = $connection->prepare("UPDATE user SET blogs = blogs + 1 WHERE username = :creator");
+                $statement->execute([':creator' => $creator]);
                 webhook($url);
             }
         } catch(PDOException $e) {
