@@ -1,5 +1,5 @@
 <?php 
-require_once '../connection.php';
+require_once '../config.php';
 session_start();
 
 if(!isset($_SESSION['blogger'])){
@@ -8,15 +8,14 @@ if(!isset($_SESSION['blogger'])){
 
 $statement = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
 $statement->execute();
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Ethereal Blog</title>
-    <link rel="icon" type="image/png" href="./assets/img/ethereal-notext.svg">
+    <link rel="icon" type="image/png" href="../assets/img/ethereal-notext.svg">
     <meta name="title" content="Ethereal Blog">
     <meta name="description" content="Get all the up to date information on the Ethereal Blogging system!">
     <meta name="keywords" content="blog, technology, cool, php, template">
@@ -44,14 +43,17 @@ $statement->execute();
             <?php
             $int = 0;
             while($int < 8 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){
+            $description = mb_strimwidth($row['description'], 0, 150);
             ?>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="padding: 5px;">
+            <a href="./blog.php?id=<?php echo $row['id']?>">
                 <div class="view-blog-div"><img class="blog-image-view" src="<?php echo $row['image'];?>">
                     <div style="display: grid;">
                         <h1 class="blog-view-title"><?php echo $row['title']?></h1>
-                        <h1 class="blog-view-desc grey">This is an example of a blog description that would be here but isn't because I am too lazy to write...</h1>
+                        <h1 class="blog-view-desc grey"><?php echo $description;?></h1>
                     </div>
                 </div>
+                </a>
             </div>
             <?php
             $int++;

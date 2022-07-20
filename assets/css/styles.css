@@ -348,6 +348,7 @@ a {
   background: #1c2532;
   border-radius: 8px;
   display: inline-flex;
+  width: 100%;
 }
 
 .blog-image-view {
@@ -369,3 +370,7 @@ a {
   margin-left: 10px;
   font-weight: 200;
 }
+
+p {
+    margin-bottom: 0px;
+};

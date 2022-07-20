@@ -1,5 +1,5 @@
 <?php
-require_once 'connection.php';
+require_once 'config.php';
 
 $statement = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
 $statement->execute();

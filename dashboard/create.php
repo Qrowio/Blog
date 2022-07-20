@@ -1,22 +1,34 @@
 <?php 
-require_once '../connection.php';
+require_once '../config.php';
 session_start();
 
 if(!isset($_SESSION['blogger'])){
     header('location: index.php');
 }
 
+function webhook($url){
+    $getURL =  "http://{$_SERVER['HTTP_HOST']}";
+    $POST = [ 'username' => 'Ethereal Bot!', 'content' => 'Testing' ];
+    $POST['content'] = 'New blog has been posted view it here: ' . $getURL;
+    $headers = [ 'Content-Type: application/json; charset=utf-8' ];
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($POST));
+    $response = curl_exec($ch);
+};
+
 if(isset($_POST['submit'])){ 
     $title = filter_var($_POST['blog_title'], FILTER_SANITIZE_STRING);
     $description = $_POST['editor1'];
     $created = new DateTime();
     $created = $created->format('l d M Y');
-    
-    // File uploading
     $dir = "../assets/img/uploads/";
     $file = $dir . basename($_FILES["file"]["name"]);
     $type = strtolower(pathinfo($file,PATHINFO_EXTENSION));
-    
+
     if(empty($_POST['blog_title'])){
         echo "Please enter a blog title";
     } else if(empty($_POST['editor1'])){
@@ -36,6 +48,7 @@ if(isset($_POST['submit'])){
                     ':created' => $created,
                     ':image' => $file,
                 ]);
+                webhook($url);
             }
         } catch(PDOException $e) {
             echo $e;

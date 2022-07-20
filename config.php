@@ -6,4 +6,5 @@ $password = '';
 
 $connection = new PDO("mysql:host={$ip};dbname={$name}", $username, $password);
 
+$url = '';
 ?>
