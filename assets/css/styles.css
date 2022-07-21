@@ -339,6 +339,18 @@ a {
     color: #fff;
 }
 
+.edit-btn {
+    max-width: 100%;
+    font-size: 22px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 1rem;
+    font-weight: 200;
+    padding: 8px 40px;
+    background: #FF6868;
+    color: #fff;
+}
+
 .submit-btn:hover {
     background: #3e36ce!important;
 }
