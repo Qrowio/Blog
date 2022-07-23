@@ -10,6 +10,13 @@ I desgined the website with Figma. You can view the design [here](https://www.fi
 
 You can attempt to take the code and set it up on your own server if you go through the code and setup the database structure but seeing as this is just for me to learn I wont be doing that. I probably am only making this for future use on my personal website.
 
+## Remaining
+
+There isn't much remaining with this template. It was a learning situation and I learnt a lot. Here are some of the things I may add;
+ - Automatically create database if it doesn't exist
+ - Have a setup system so people can setup the website.
+ - I need to add pagination (I keep forgetting to do so)
+
 ## Features
 
 - Beautiful blog website made with Bootstrap.
