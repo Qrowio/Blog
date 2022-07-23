@@ -2,10 +2,10 @@
 require_once 'config.php';
 
 $ID = $_GET['id'];
-
 $statement = $connection->prepare("SELECT * FROM blogs WHERE id = :id ORDER BY ID DESC");
 $statement->execute([':id' => $ID]);
 $row =  $statement->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
