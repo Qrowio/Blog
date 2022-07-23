@@ -1,11 +1,11 @@
 <?php
 require_once 'config.php';
-
-$statement = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
-$statement->execute();
-
 $list = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
 $list->execute();
+
+$search = $connection->prepare("SELECT * FROM blogs WHERE title LIKE :name");
+$search->execute([":name" => '%'.$_POST['search'].'%']);
+$row =  $search->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@ $list->execute();
             <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><img src="assets/img/ethereal.png"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-3">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link active" href="#">Blogs</a></li>
                         <li class="nav-item"><a class="nav-link active" href="#">Discord</a></li>
                     </ul><button class="button">Discord</button>
@@ -46,16 +46,16 @@ $list->execute();
     <div class="container" style="margin-top: 4rem;">
         <div class="row">
             <div class="col-md-7 col-lg-8 col-xl-8 col-xxl-8">
-            <form method="post" action="search.php"><div class="blog-search-div"><input name="search" type="text" class="search-input" placeholder="Search for a blog..."><button name="searchbtn" class="search-button">Search</button></div></form>
+            <form method="post"><div class="blog-search-div"><input name="search" type="text" class="search-input" placeholder="Search for a blog..."><button name="searchbtn" class="search-button">Search</button></div></form>
                    <?php
                    $int = 0;
-                    while($int < 3 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){
+                    foreach(array_slice($row, 0, 3) as $r){
                     ?>
                 <div class="blog-main-div">
-                    <h1 class="blog-main-title"><?php echo $row['title'];?></h1>
-                    <h1 class="blog-main-date grey"><?php echo $row['createdAt'];?></h1>
+                    <h1 class="blog-main-title"><?php echo $r['title'];?></h1>
+                    <h1 class="blog-main-date grey"><?php echo $r['createdAt'];?></h1>
                     <hr class="blog-main-hr">
-                    <?php $description = mb_strimwidth($row['description'], 0, 300);
+                    <?php $description = mb_strimwidth($r['description'], 0, 300);
                     ?>
                     <h1 class="blog-main-desc"><?php echo $description ?><br></h1><a href='blog.php?id=<?php echo $row['id']?>'><button class="continue-button" type="button">Continue Reading</button></a>
                 </div>

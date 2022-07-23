@@ -385,4 +385,39 @@ a {
 
 p {
     margin-bottom: 0px;
-};
+}
+
+.blog-search-div {
+  /*padding: 15px;*/
+  background: #1c2532;
+  max-width: 800px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 115px 15px 15px;
+  background: #1c2532;
+  border: none!important;
+  color: #fff!important;
+  border-radius: 8px!important;
+}
+
+.search-button {
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100px;
+  border-radius: 8px;
+  background: #4f46e5!important;
+  color: #fff!important;
+  box-shadow: none!important;
+}
+
+.search-button:hover {
+  background: #362ec1!important;
+}
