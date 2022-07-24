@@ -1,65 +1,10 @@
 <?php 
-require_once '../config.php';
+include "../includes/handler.inc.php";
+$database = new Database();
 session_start();
-
-if(!isset($_SESSION['blogger'])){
-    header('location: index.php');
-}
-
-function webhook($url){
-    $getURL =  "http://{$_SERVER['HTTP_HOST']}";
-    $POST = [ 'username' => 'Ethereal Bot!', 'content' => 'Testing' ];
-    $POST['content'] = 'New blog has been posted view it here: ' . $getURL;
-    $headers = [ 'Content-Type: application/json; charset=utf-8' ];
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($POST));
-    $response = curl_exec($ch);
-};
-
-if(isset($_POST['submit'])){ 
-    $title = filter_var($_POST['blog_title'], FILTER_SANITIZE_STRING);
-    $description = $_POST['editor1'];
-    $created = new DateTime();
-    $created = $created->format('l d M Y');
-    $creator = $_SESSION['blogger']['username'];
-    $dir = "../assets/img/uploads/";
-    $file = $dir . basename($_FILES["file"]["name"]);
-    $type = strtolower(pathinfo($file,PATHINFO_EXTENSION));
-
-    if(empty($_POST['blog_title'])){
-        echo "Please enter a blog title";
-    } else if(empty($_POST['editor1'])){
-        echo "Please enter a description";
-    } else {
-        try {
-            if(file_exists($file)) {
-                echo "Sorry, file already exists.";
-            } else if($type != "jpg" && $type != "png" && $type != "gif" && $type != "jpeg"){
-                echo "Please upload a file type that is JPG, PNG, GIF or Jpeg.";
-            } else {
-                move_uploaded_file($_FILES["file"]["tmp_name"], $file);
-                $statement = $connection->prepare("INSERT INTO blogs (title,description,createdAt,image) VALUES (:title,:desc,:created,:image)");
-                $statement->execute([
-                    ':title' => $title,
-                    ':desc' => $description,
-                    ':created' => $created,
-                    ':image' => $file,
-                ]);
-
-                $statement = $connection->prepare("UPDATE user SET blogs = blogs + 1 WHERE username = :creator");
-                $statement->execute([':creator' => $creator]);
-                webhook($url);
-            }
-        } catch(PDOException $e) {
-            echo $e;
-        }
-    }
-}
-
+$session = new Session();
+$session->dashboard();
+$create = new Create();
 ?>
 <!DOCTYPE html>
 <html lang="en">

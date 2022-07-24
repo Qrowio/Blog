@@ -1,38 +1,9 @@
 <?php
-require_once 'config.php';
+include "includes/handler.inc.php";
 session_start();
-
-if(isset($_SESSION['blogger'])){
-    header('location: dashboard/index.php');
-}
-
-if(isset($_POST['submit'])){
-    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
-    $password = strip_tags($_POST['password']);
-    if(!isset($username)){
-        echo "Please submit a username";
-    } else if (!isset($password)){
-        echo "Please submit a password";
-    } else {
-        try {
-            $statement = $connection->prepare("SELECT * FROM user WHERE username = :username");
-            $statement->execute([':username' => $username]);
-            $row = $statement->fetch(PDO::FETCH_ASSOC);
-            if($statement->rowCount() > 0){
-                if(password_verify($_POST['password'], $row['password'])){
-                    $_SESSION['blogger']['username'] = $row['username'];
-                    $_SESSION['blogger']['id'] = $row['id'];
-                    $_SESSION['blogger']['blogs'] = $row['blogs'];
-                    header('location: ../Blog/dashboard/index.php');
-                } else {
-                    echo 'Invalid credentials';
-                };
-            }
-        } catch(PDOException $e) {
-
-        }
-    }
-}
+$database = new Database();
+$session = new Session();
+$session->logIn();
 ?>
 <!DOCTYPE html>
 <html lang="en">

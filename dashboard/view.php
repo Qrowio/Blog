@@ -1,10 +1,9 @@
 <?php 
-require_once '../config.php';
+include "../includes/handler.inc.php";
+$database = new Database();
 session_start();
-
-if(!isset($_SESSION['blogger'])){
-    header('location: index.php');
-}
+$session = new Session();
+$session->dashboard();
 
 $statement = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
 $statement->execute();

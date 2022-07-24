@@ -1,10 +1,10 @@
 <?php 
-require_once '../config.php';
+include "../includes/handler.inc.php";
+$database = new Database();
 session_start();
+$session = new Session();
+$session->dashboard();
 
-if(!isset($_SESSION['blogger'])){
-    header('location: index.php');
-}
 $id = $_GET['id'];
 
 $statement = $connection->prepare("SELECT * FROM blogs WHERE id = :id");
