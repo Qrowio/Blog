@@ -5,8 +5,7 @@ session_start();
 $session = new Session();
 $session->dashboard();
 
-$statement = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
-$statement->execute();
+$statement = $database->selectIDDesc();
 ?><!DOCTYPE html>
 <html lang="en">
 

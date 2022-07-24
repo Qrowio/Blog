@@ -4,32 +4,8 @@ $database = new Database();
 session_start();
 $session = new Session();
 $session->dashboard();
-
-$id = $_GET['id'];
-
-$statement = $connection->prepare("SELECT * FROM blogs WHERE id = :id");
-$statement->execute([":id" => $id]);
-$row =  $statement->fetch(PDO::FETCH_ASSOC);
-
-if(isset($_POST['delete'])){
-    $image = $row['image'];
-    unlink($image);
-    $statement = $connection->prepare("DELETE FROM blogs WHERE id = :id");
-    $statement->execute([":id" => $id]);
-    $row =  $statement->fetch(PDO::FETCH_ASSOC);
-    header('location: view.php');
-}
-
-if(isset($_POST['edit'])){
-    $title = filter_var($_POST['blog_title'], FILTER_SANITIZE_STRING);
-    $description = $_POST['editor1'];
-    $image = $_FILES["file"];
-    if(!empty($title && $description && $image)){
-        $statement = $connection->prepare("UPDATE blogs SET title = '$title', description = '$description' WHERE id = $id");
-        $statement->execute();
-        header("Refresh:0");
-    }
-}
+$rows = new Edit();
+$row = $rows->info();
 ?>
 <!DOCTYPE html>
 <html lang="en">
