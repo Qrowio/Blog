@@ -4,7 +4,9 @@ class Database {
     private $database = 'blog';
     private $username = 'root';
     private $password = '';
+    private $sql;
     protected $connection;
+    private $row;
 
     function __construct() {
         try {
@@ -32,15 +34,24 @@ class Database {
         }
     }
 
-    public function selectRows() {
-        $sql = $this->connection->prepare("SELECT * FROM blogs");
-        $sql->execute();
-        $row =  $sql->fetchAll(PDO::FETCH_ASSOC);
+    public function selectIDDesc() {
+        $this->sql = $this->connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
+        $this->sql->execute();
+        return $this->sql;
     }
 
-    public function selectIDDesc() {
-    $sql = $this->connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
-    $sql->execute();
+    public function blogPage() {
+        $this->sql = $this->connection->prepare("SELECT * FROM blogs WHERE id = :id ORDER BY ID DESC");
+        $this->sql->execute([':id' => $_GET['id']]); 
+        $this->row = $this->sql->fetch(PDO::FETCH_ASSOC);
+        return $this->row;
+    }
+
+    public function search() {
+        $this->sql = $this->connection->prepare("SELECT * FROM blogs WHERE title LIKE :name");
+        $this->sql->execute([":name" => '%'.$_POST['search'].'%']);
+        $this->row = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+        return $this->row;
     }
 }
 

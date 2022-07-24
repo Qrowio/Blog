@@ -1,11 +1,8 @@
 <?php
-require_once 'config.php';
-$list = $connection->prepare("SELECT * FROM blogs ORDER BY id DESC");
-$list->execute();
-
-$search = $connection->prepare("SELECT * FROM blogs WHERE title LIKE :name");
-$search->execute([":name" => '%'.$_POST['search'].'%']);
-$row =  $search->fetchAll(PDO::FETCH_ASSOC);
+include "includes/handler.inc.php";
+$database = new Database();
+$list = $database->selectIDDesc();
+$row = $database->search();
 ?>
 <!DOCTYPE html>
 <html lang="en">
