@@ -53,6 +53,13 @@ class Database {
         $this->row = $this->sql->fetchAll(PDO::FETCH_ASSOC);
         return $this->row;
     }
+
+    public function searchAjax() {
+        $this->sql = $this->connection->prepare("SELECT * FROM blogs WHERE title LIKE :name");
+        $this->sql->execute([":name" => '%'.$_GET['name'].'%']);
+        $this->row = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+        return $this->row;
+    }
 }
 
 ?>

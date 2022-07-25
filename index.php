@@ -23,6 +23,24 @@ $statement = $database->selectIDDesc();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Clamp.js/0.5.1/clamp.min.js"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script>
+    function searchBlog(str){
+        if(str == ""){
+            return;
+        } else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                      document.getElementById("test").innerHTML = this.responseText;
+                } else {
+
+                }
+            }
+            xmlhttp.open("GET","search.php?name="+str,true);
+            xmlhttp.send();
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -44,7 +62,8 @@ $statement = $database->selectIDDesc();
     <div class="container" style="margin-top: 4rem;">
         <div class="row">
             <div class="col-md-7 col-lg-8 col-xl-8 col-xxl-8">
-            <form method="post" action="search.php"><div class="blog-search-div"><input name="search" type="text" class="search-input" placeholder="Search for a blog..."><button name="searchbtn" class="search-button">Search</button></div></form>
+            <form><div class="blog-search-div"><input  type="text" onkeyup="searchBlog(this.value)" class="search-input" placeholder="Search for a blog..."></input></div></form>
+            <h1 id="test"></h1>
                    <?php
                    $int = 0;
                     while($int < 3 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){

@@ -421,3 +421,24 @@ p {
 .search-button:hover {
   background: #362ec1!important;
 }
+
+.blog-searchh-div {
+    background: #1c2532;
+    padding: 10px;
+    max-width: 800px;
+}
+
+.blog-search-title {
+    font-size: 22px;
+}
+
+.blog-search-title:hover {
+    color: #b6b6b6;
+}
+
+.blog-search-desc {
+    font-size: 18px!important;
+    font-weight: 200;
+    color: #b6b6b6;
+    margin-bottom: 0px;
+}
