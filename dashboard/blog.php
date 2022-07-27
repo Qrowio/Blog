@@ -31,7 +31,7 @@ $row = $rows->info();
         <div class="row">
             <div class="col-md-12" style="padding: 0px;"><a href="../dashboard/index.php"><button class="btn btn-primary goback" type="button" style="margin-bottom: 4rem;">Go Back</button></a>
                 <h1 class="index-heading">Blog Edit<br></h1>
-                <h1 class="index-desc grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Leo sollicitudin eu volutpat aliquam mauris, pellentesque sit placerat urna. Vitae dictum tincidunt ut ornare facilisis sed magna pulvinar elementum.<br></h1>
+                <h1 class="index-desc grey">Here you can edit or delete your blog. Be careful because pressing delete will permanently delete your blog. This means that you will not be able to get the blog back. You can optionally edit the blog. <br></h1>
                 <hr class="create-hr">
             </div>
         </div>

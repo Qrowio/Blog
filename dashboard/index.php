@@ -30,7 +30,7 @@ $session->dashboard();
         <div class="row">
             <div class="col-md-12">
                 <h1 class="index-heading">Heyyo! 👋<br></h1>
-                <h1 class="index-desc grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Luctus netus senectus est tortor sed auctor rhoncus, lacus eget. Sit lorem morbi varius amet amet, purus tellus mi. Fringilla ut adipiscing senectus convallis bibendum risus tempor. Luctus est eu sit vulputate viverra sed. Interdum enim ornare id amet.<br></h1>
+                <h1 class="index-desc grey">Welcome to the Ethereal Blog software! This is an open source project that I hope you enjoy. I have been working on this to increase my PHP ability and it has come along well. If you need help, please check out the links below. Have fun!<br></h1>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ $statement = $database->selectIDDesc();
         <div class="row">
            <div class="col-md-12" style="padding: 0px;"><a href="../dashboard/index.php"><button class="btn btn-primary goback" type="button" style="margin-bottom: 4rem;">Go Back</button></a>
                 <h1 class="index-heading">View All Blogs<br></h1>
-                <h1 class="index-desc grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Leo sollicitudin eu volutpat aliquam mauris, pellentesque sit placerat urna. Vitae dictum tincidunt ut ornare facilisis sed magna pulvinar elementum.<br></h1>
+                <h1 class="index-desc grey">These are all your blogs you have created! This is ordered by the ID in the database so it's latest to oldest.<br></h1>
                 <hr class="create-hr">
             </div>
         </div>
