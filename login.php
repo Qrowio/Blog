@@ -3,6 +3,7 @@ include "includes/handler.inc.php";
 session_start();
 $database = new Database();
 $session = new Session();
+$login = new Login();
 $session->logIn();
 ?>
 <!DOCTYPE html>
