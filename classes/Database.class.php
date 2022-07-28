@@ -7,6 +7,9 @@ class Database {
     private $sql;
     protected $connection;
     private $row;
+    private $page_num;
+    private $total_number;
+    private $page_limit;
 
     function __construct() {
         try {
@@ -60,6 +63,31 @@ class Database {
         $this->row = $this->sql->fetchAll(PDO::FETCH_ASSOC);
         return $this->row;
     }
-}
 
+    public function paginationPull(){
+        $this->sql = $this->connection->prepare("SELECT * FROM blogs");
+        $this->sql->execute();
+        $this->row = $this->sql->rowCount();
+        $this->total_number = $this->row;
+        $this->page_num = ceil($this->total_number / 3);
+
+        if(!isset($_GET['page'])){
+            $this->page = 1;
+        } else {
+            $this->page = $_GET['page'];
+        }
+
+        if(!isset($_GET['page']) || $_GET['page'] < 1 || !is_numeric($_GET['page']) || $_GET['page'] > $this->page_num){
+            $this->page = 1;
+        }
+
+        $this->page_limit = ($this->page-1)*3;
+        $this->sql = $this->connection->prepare("SELECT * FROM blogs ORDER BY ID DESC LIMIT ". $this->page_limit . ",3 ");
+
+        $this->page = $this->page_num + 1;
+        $this->sql->execute();
+        return array($this->sql,$this->page);
+    }
+    
+}
 ?>

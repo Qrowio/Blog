@@ -3,7 +3,7 @@
 include "includes/handler.inc.php";
 $database = new Database();
 $list = $database->selectIDDesc();
-$statement = $database->selectIDDesc();
+$statement= $database->paginationPull();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +66,7 @@ $statement = $database->selectIDDesc();
             <h1 id="test"></h1>
                    <?php
                    $int = 0;
-                    while($int < 3 && $row =  $statement->fetch(PDO::FETCH_ASSOC)){
+                    while($int < 3 && $row =  $statement[0]->fetch(PDO::FETCH_ASSOC)){
                     ?>
                 <div class="blog-main-div">
                     <h1 class="blog-main-title"><?php echo $row['title'];?></h1>
@@ -82,9 +82,17 @@ $statement = $database->selectIDDesc();
                     ?>
                 <nav style="max-width: 800px;">
                     <ul class="pagination" style="justify-content: center;">
-                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+
+                        <?php
+                        $int = 1;
+                        while($int < $statement[1]){
+                            ?>
+                            <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $int?>"><?php echo $int?></a></li>
+                            <?php
+                            
+                        $int++;
+                        }
+                        ?>
                     </ul>
                 </nav>
             </div>
